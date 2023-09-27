@@ -50,7 +50,7 @@ img {
 
 
 /* 768*320 */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 770px) {
 
     #millones {
         font-size: 24pt !important;
