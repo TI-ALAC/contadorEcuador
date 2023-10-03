@@ -18,7 +18,7 @@ async function getUser() {
     //===
     // VARIABLES
     //===
-    const DATE_TARGET = new Date('09/27/2023 5:00 PM');
+    const DATE_TARGET = new Date('10/4/2023 5:00 PM');
     // DOM for render
     const SPAN_HOURS = document.querySelector('span#hours');
     const SPAN_MINUTES = document.querySelector('span#minutes');
