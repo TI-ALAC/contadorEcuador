@@ -13,61 +13,35 @@ async function init() {
 init();
 async function getUser() {
 
-  document.addEventListener('DOMContentLoaded', () => {
+  // Definir la fecha objetivo (en el formato "YYYY-MM-DDTHH:MM:SS")
+  var fechaObjetivo = new Date("2023-10-28T15:00:00").getTime();
 
-    //===
-    // VARIABLES
-    //===
-    const DATE_TARGET = new Date('10/4/2023 5:00 PM');
-    // DOM for render
-    const SPAN_HOURS = document.querySelector('span#hours');
-    const SPAN_MINUTES = document.querySelector('span#minutes');
-    const SPAN_SECONDS = document.querySelector('span#seconds');
-    // Milliseconds for the calculations
-    const MILLISECONDS_OF_A_SECOND = 1000;
-    const MILLISECONDS_OF_A_MINUTE = MILLISECONDS_OF_A_SECOND * 60;
-    const MILLISECONDS_OF_A_HOUR = MILLISECONDS_OF_A_MINUTE * 60;
-    const MILLISECONDS_OF_A_DAY = MILLISECONDS_OF_A_HOUR * 24
+  // Actualizar la cuenta regresiva cada segundo
+  var x = setInterval(function() {
 
-    //===
-    // FUNCTIONS
-    //===
+      // Obtener la fecha y hora actual
+      var ahora = new Date().getTime();
 
-    /**
-    * Method that updates the countdown and the sample
-    */
-    function updateCountdown() {
-      // Calcs
-      const NOW = new Date()
-      const DURATION = DATE_TARGET - NOW;
-      const REMAINING_HOURS = Math.floor((DURATION % MILLISECONDS_OF_A_DAY) / MILLISECONDS_OF_A_HOUR);
-      const REMAINING_MINUTES = Math.floor((DURATION % MILLISECONDS_OF_A_HOUR) / MILLISECONDS_OF_A_MINUTE);
-      const REMAINING_SECONDS = Math.floor((DURATION % MILLISECONDS_OF_A_MINUTE) / MILLISECONDS_OF_A_SECOND);
-      // Thanks Pablo Monteserín (https://pablomonteserin.com/cuenta-regresiva/)
+      // Calcular la diferencia en milisegundos entre la fecha objetivo y la fecha actual
+      var diferencia = fechaObjetivo - ahora;
 
-      // Render
-      if (REMAINING_HOURS < 10) {
-        SPAN_HOURS.textContent = "0" + REMAINING_HOURS;
-      } else {
-        SPAN_HOURS.textContent = REMAINING_HOURS;
+      // Convertir los días restantes en horas
+      var horas = Math.floor(diferencia / (1000 * 60 * 60));
+
+      // Calcular minutos y segundos
+      var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      var segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      // Formatear la cuenta regresiva en el formato hh:mm:ss
+      var cuentaRegresivaFormateada = ('0' + horas).slice(-2) + ':' + ('0' + minutos).slice(-2) + ':' + ('0' + segundos).slice(-2);
+
+      // Mostrar la cuenta regresiva en el elemento con el ID "cuentaRegresiva"
+      document.getElementById("cuentaRegresiva").innerHTML = cuentaRegresivaFormateada;
+
+      // Si la cuenta regresiva llega a cero, detenerla
+      if (diferencia < 0) {
+          clearInterval(x);
+          document.getElementById("cuentaRegresiva").innerHTML = "¡Tiempo Expirado!";
       }
-      if (REMAINING_MINUTES < 10) {
-        SPAN_MINUTES.textContent = "0" + REMAINING_MINUTES;
-      } else {
-        SPAN_MINUTES.textContent = REMAINING_MINUTES;
-      }
-      if (REMAINING_SECONDS < 10) {
-        SPAN_SECONDS.textContent = "0" + REMAINING_SECONDS;
-      } else {
-        SPAN_SECONDS.textContent = REMAINING_SECONDS;
-      }
-    }
-
-    //===
-    // INIT
-    //===
-    updateCountdown();
-    // Refresh every second
-    setInterval(updateCountdown, MILLISECONDS_OF_A_SECOND);
-  });
+  }, 1000);
 }
