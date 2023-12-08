@@ -14,7 +14,7 @@ init();
 async function getUser() {
 
   // Definir la fecha objetivo (en el formato "YYYY-MM-DDTHH:MM:SS")
-  var fechaObjetivo = new Date("2023-10-28T15:00:00").getTime();
+  var fechaObjetivo = new Date("2023-12-10T16:30:00").getTime();
 
   // Actualizar la cuenta regresiva cada segundo
   var x = setInterval(function() {
