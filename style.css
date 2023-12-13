@@ -56,15 +56,10 @@ img {
         font-size: 24pt !important;
         font-family: 'POPPINS';
         color: #fff;
-        left: 60%;
-        top: 77%;
+        left: 52%;
+        top: 75%;
         position: absolute;
         font-weight: 700;
         letter-spacing: 4px;
     }
-
-    #cuentaRegresiva2{
-        left: 57% !important;
-    }  
-
 }
